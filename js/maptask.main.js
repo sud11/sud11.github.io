@@ -34,6 +34,8 @@ function calcDateTime(offset) {
 function populateInfoWindowAndCallback(position, callback) {
 	var myPromise = new Promise(function (resolve, reject) {
 		var cur_time = Math.round(new Date().getTime() / 1000);
+
+		// Find the time offset for the selected lattitude and longitude
 		$.ajax({
 			url: "https://maps.googleapis.com/maps/api/timezone/json?",
 			type: "GET",
@@ -44,6 +46,8 @@ function populateInfoWindowAndCallback(position, callback) {
 			},
 			success: function (res) {
 				console.log(res);
+
+				// Get the time string for the offset
 				var timeString = calcDateTime(res.dstOffset + res.rawOffset);
         localTimeString = timeString;
 				resolve();
@@ -52,6 +56,8 @@ function populateInfoWindowAndCallback(position, callback) {
 	});
 	myPromise.then(
 		function (res) {
+
+			// Query for the weather at the selected lattitude and longitude
 			$.ajax({
 				url: "https://api.openweathermap.org/data/2.5/weather?",
 				type: "GET",
