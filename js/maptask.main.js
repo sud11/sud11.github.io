@@ -46,8 +46,12 @@ function populateInfoWindowAndCallback(position, callback) {
 			success: function (res) {
 				console.log(res);
 				// Get the time string for the offset
-				var timeString = calcDateTime(res.dstOffset + res.rawOffset);
-        localTimeString = timeString;
+				if(res.status == "OK")
+				{	var timeString = calcDateTime(res.dstOffset + res.rawOffset);
+					localTimeString = timeString;
+				}
+				else
+					localTimeString = "Not available in water!"
 				resolve();
 			}
 		});
