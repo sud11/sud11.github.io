@@ -84,7 +84,7 @@ function populateInfoWindowAndCallback(position, callback) {
 			});
 		},
 		function (result) {
-			console.error("Error : unable to calculate weather!", result);
+			console.error("Error : Unable to calculate weather!", result);
 		}
 	);
 }
